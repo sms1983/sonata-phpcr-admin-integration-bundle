@@ -33,14 +33,14 @@ class RouteAdmin extends AbstractAdmin
      */
     protected $contentRoot;
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        $listMapper->addIdentifier('path', 'text');
+        $list->addIdentifier('path', 'text');
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->tab('form.tab_general')
                 ->with('form.group_location', ['class' => 'col-md-3'])
                     ->add(
@@ -53,7 +53,7 @@ class RouteAdmin extends AbstractAdmin
         ;
 
         if (null === $this->getParentFieldDescription()) {
-            $formMapper
+            $form
                 ->with('form.group_target', ['class' => 'col-md-9'])
                     ->add(
                         'content',
@@ -89,18 +89,19 @@ class RouteAdmin extends AbstractAdmin
             ;
         }
 
-        $formMapper
+        $form
             ->end(); // tab general/routing
 
-        $this->addTransformerToField($formMapper->getFormBuilder(), 'parentDocument');
+        $this->addTransformerToField($form->getFormBuilder(), 'parentDocument');
         if (null === $this->getParentFieldDescription()) {
-            $this->addTransformerToField($formMapper->getFormBuilder(), 'content');
+            $this->addTransformerToField($form->getFormBuilder(), 'content');
         }
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
+
     {
-        $datagridMapper->add('name', 'doctrine_phpcr_nodename');
+        $filter->add('name', 'doctrine_phpcr_nodename');
     }
 
     public function setContentRoot($contentRoot)
@@ -108,7 +109,7 @@ class RouteAdmin extends AbstractAdmin
         $this->contentRoot = $contentRoot;
     }
 
-    public function getExportFormats()
+    public function getExportFormats(): array
     {
         return array();
     }
@@ -185,19 +186,19 @@ class RouteAdmin extends AbstractAdmin
         return $options;
     }
 
-    public function prePersist($object)
+    protected function prePersist(object $object): void
     {
         $defaults = array_filter($object->getDefaults());
         $object->setDefaults($defaults);
     }
 
-    public function preUpdate($object)
+    protected function preUpdate(object $object): void
     {
         $defaults = array_filter($object->getDefaults());
         $object->setDefaults($defaults);
     }
 
-    public function toString($object)
+    public function toString(object $object): string
     {
         return $object instanceof Route && $object->getId()
             ? $object->getId()
