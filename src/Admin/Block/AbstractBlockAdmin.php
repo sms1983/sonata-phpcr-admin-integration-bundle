@@ -29,7 +29,7 @@ abstract class AbstractBlockAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function getExportFormats()
+    public function getExportFormats(): array
     {
         return [];
     }
