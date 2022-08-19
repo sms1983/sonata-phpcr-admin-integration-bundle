@@ -37,7 +37,7 @@ abstract class AbstractBlockAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
         $formMapper
             ->tab('form.tab_general')
