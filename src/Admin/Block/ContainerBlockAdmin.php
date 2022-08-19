@@ -23,9 +23,9 @@ class ContainerBlockAdmin extends AbstractBlockAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        $listMapper
+        $list
             ->addIdentifier('id', 'text')
             ->add('name', 'text')
         ;
@@ -34,17 +34,17 @@ class ContainerBlockAdmin extends AbstractBlockAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        parent::configureFormFields($formMapper);
+        parent::configureFormFields($form);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('name', 'doctrine_phpcr_nodename')
         ;
     }
