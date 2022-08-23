@@ -41,10 +41,10 @@ class PublishTimePeriodExtension extends AbstractAdminExtension
     /**
      * {@inheritdoc}
      */
-    public function configureFormFields(FormMapper $formMapper)
+    public function configureFormFields(FormMapper $form): void
     {
-        if ($formMapper->hasOpenTab()) {
-            $formMapper->end();
+        if ($form->hasOpenTab()) {
+            $form->end();
         }
 
         $dateOptions = [
@@ -52,7 +52,7 @@ class PublishTimePeriodExtension extends AbstractAdminExtension
             'required' => false,
         ];
 
-        $formMapper
+        $form
             ->tab($this->formTab, 'form.tab_publish' === $this->formTab
                 ? ['translation_domain' => 'CmfSonataPhpcrAdminIntegrationBundle']
                 : []

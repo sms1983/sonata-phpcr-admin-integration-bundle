@@ -32,7 +32,7 @@ class StaticContentAdmin extends AbstractAdmin
      */
     private $ckEditorConfig;
 
-    public function getExportFormats()
+    public function getExportFormats(): array
     {
         return [];
     }
@@ -49,18 +49,18 @@ class StaticContentAdmin extends AbstractAdmin
         $this->ckEditorConfig = $config;
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        $listMapper
+        $list
             ->addIdentifier('id', 'text')
             ->addIdentifier('title', 'text')
         ;
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
         $editView = (bool) $this->id($this->getSubject());
-        $formMapper
+        $form
             ->tab('form.tab_general')
                 ->with('form.group_content', ['class' => 'col-md-9'])
                     ->add('title', TextType::class)
@@ -87,18 +87,18 @@ class StaticContentAdmin extends AbstractAdmin
             ->end()
         ;
 
-        $this->addTransformerToField($formMapper->getFormBuilder(), 'parentDocument');
+        $this->addTransformerToField($form->getFormBuilder(), 'parentDocument');
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('title', 'doctrine_phpcr_string')
             ->add('name', 'doctrine_phpcr_nodename')
         ;
     }
 
-    public function toString($object)
+    public function toString($object): string
     {
         return $object instanceof StaticContentBase && $object->getTitle()
             ? $object->getTitle()

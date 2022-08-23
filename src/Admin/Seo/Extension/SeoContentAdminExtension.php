@@ -42,13 +42,13 @@ class SeoContentAdminExtension extends AbstractAdminExtension
         $this->formTab = $formTab;
     }
 
-    public function configureFormFields(FormMapper $formMapper)
+    public function configureFormFields(FormMapper $form): void
     {
-        if ($formMapper->hasOpenTab()) {
-            $formMapper->end();
+        if ($form->hasOpenTab()) {
+            $form->end();
         }
 
-        $formMapper
+        $form
             ->tab($this->formTab, 'form.tab_seo' === $this->formTab
                 ? ['translation_domain' => 'CmfSonataPhpcrAdminIntegrationBundle']
                 : []

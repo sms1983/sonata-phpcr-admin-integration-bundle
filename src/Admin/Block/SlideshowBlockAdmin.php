@@ -42,10 +42,10 @@ class SlideshowBlockAdmin extends AbstractBlockAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        parent::configureListFields($listMapper);
-        $listMapper
+        parent::configureListFields($list);
+        $list
             ->addIdentifier('id', 'text')
             ->add('title', 'text')
         ;
@@ -54,13 +54,13 @@ class SlideshowBlockAdmin extends AbstractBlockAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
         if (null === $this->getParentFieldDescription()) {
-            parent::configureFormFields($formMapper);
+            parent::configureFormFields($form);
         }
 
-        $formMapper
+        $form
             ->tab('form.tab_general')
                 ->with('form.group_block', null === $this->getParentFieldDescription()
                     ? ['class' => 'col-md-9']
@@ -83,9 +83,9 @@ class SlideshowBlockAdmin extends AbstractBlockAdmin
     /**
      * {@inheritdoc}
      */
-    public function prePersist($slideshow)
+    public function prePersist(object $object): void
     {
-        foreach ($slideshow->getChildren() as $child) {
+        foreach ($object->getChildren() as $child) {
             $child->setName($this->generateName());
         }
     }
@@ -93,9 +93,9 @@ class SlideshowBlockAdmin extends AbstractBlockAdmin
     /**
      * {@inheritdoc}
      */
-    public function preUpdate($slideshow)
+    public function preUpdate(object $object): void
     {
-        foreach ($slideshow->getChildren() as $child) {
+        foreach ($object->getChildren() as $child) {
             if (!$this->modelManager->getNormalizedIdentifier($child)) {
                 $child->setName($this->generateName());
             }
@@ -114,7 +114,7 @@ class SlideshowBlockAdmin extends AbstractBlockAdmin
         return 'child_'.time().'_'.rand();
     }
 
-    public function toString($object)
+    public function toString($object): string
     {
         return $object instanceof SlideshowBlock && $object->getTitle()
             ? $object->getTitle()
