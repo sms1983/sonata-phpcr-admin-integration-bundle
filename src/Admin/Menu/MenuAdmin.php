@@ -45,7 +45,7 @@ class MenuAdmin extends AbstractMenuNodeAdmin
         }
     }
 
-    public function getNewInstance()
+    public function getNewInstance(): object
     {
         /** @var $new Menu */
         $new = parent::getNewInstance();
