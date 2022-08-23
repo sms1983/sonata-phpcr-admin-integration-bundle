@@ -26,11 +26,11 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
 {
     protected $recursiveBreadcrumbs = true;
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        parent::configureListFields($listMapper);
+        parent::configureListFields($list);
 
-        $listMapper
+        $list
             ->add('uri', 'text')
             ->add('route', 'text')
         ;
@@ -39,9 +39,9 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->tab('form.tab_general')
                 ->with('form.group_location', ['class' => 'col-sm-3'])
                     ->add(
@@ -53,13 +53,13 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
             ->end()
         ;
 
-        $this->addTransformerToField($formMapper->getFormBuilder(), 'parentDocument');
+        $this->addTransformerToField($form->getFormBuilder(), 'parentDocument');
 
-        parent::configureFormFields($formMapper);
+        parent::configureFormFields($form);
 
         if (null === $this->getParentFieldDescription()) {
             // Add the choice for the node links "target"
-            $formMapper
+            $form
                 ->tab('form.tab_general')
                     ->with('form.group_target', ['class' => 'col-sm-6'])
                         ->add('linkType', ChoiceFieldMaskType::class, array(
@@ -86,7 +86,7 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
                 ->end()
             ;
 
-            $this->addTransformerToField($formMapper->getFormBuilder(), 'content');
+            $this->addTransformerToField($form->getFormBuilder(), 'content');
         }
     }
 
