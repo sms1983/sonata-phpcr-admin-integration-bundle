@@ -61,9 +61,9 @@ abstract class AbstractMenuNodeAdmin extends AbstractAdmin
         ;
     }
 
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $show): void
     {
-        $showMapper
+        $show
             ->add('id')
             ->add('name')
             ->add('label')
