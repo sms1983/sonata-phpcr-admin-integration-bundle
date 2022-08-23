@@ -21,6 +21,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Form\Type\ChoiceFieldMaskType;
 use Knp\Menu\ItemInterface as MenuItemInterface;
 use Doctrine\Common\Util\ClassUtils;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class MenuNodeAdmin extends AbstractMenuNodeAdmin
 {
@@ -93,7 +94,7 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
     /**
      * {@inheritdoc}
      */
-    public function getFormBuilder()
+    public function getFormBuilder(): FormBuilderInterface
     {
         $formBuilder = parent::getFormBuilder();
 
