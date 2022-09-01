@@ -36,7 +36,7 @@ class BlockCacheExtension extends AbstractAdminExtension
      *
      * @param FormMapper $formMapper
      */
-    public function configureFormFields(FormMapper $formMapper)
+    public function configureFormFields(FormMapper $form): void
     {
         if ($formMapper->hasOpenTab()) {
             $formMapper->end();
