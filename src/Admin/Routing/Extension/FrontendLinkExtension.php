@@ -63,12 +63,8 @@ class FrontendLinkExtension extends AbstractAdminExtension
     /**
      * @throws InvalidConfigurationException
      */
-    public function configureTabMenu(
-        AdminInterface $admin,
-        MenuItemInterface $menu,
-        $action,
-        AdminInterface $childAdmin = null
-    ) {
+    public function configureTabMenu(AdminInterface $admin, MenuItemInterface $menu, string $action, ?AdminInterface $childAdmin = null): void
+    {
         if (!$subject = $admin->getSubject()) {
             return;
         }
