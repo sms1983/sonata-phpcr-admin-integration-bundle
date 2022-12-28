@@ -59,8 +59,8 @@ class ReferenceBlockAdmin extends AbstractBlockAdmin
      */
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $filter
-            ->add('name', 'doctrine_phpcr_nodename')
-        ;
+        // $filter
+        //     ->add('name', 'doctrine_phpcr_nodename')
+        // ;
     }
 }
