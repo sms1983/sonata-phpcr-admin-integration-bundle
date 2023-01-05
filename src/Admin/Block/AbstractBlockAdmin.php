@@ -39,7 +39,7 @@ abstract class AbstractBlockAdmin extends AbstractAdmin
      */
     protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->tab('form.tab_general')
                 ->with('form.group_location', ['class' => 'col-md-3'])
                     ->add(
@@ -52,6 +52,6 @@ abstract class AbstractBlockAdmin extends AbstractAdmin
             ->end()
         ;
 
-        $this->addTransformerToField($formMapper->getFormBuilder(), 'parentDocument');
+        $this->addTransformerToField($form->getFormBuilder(), 'parentDocument');
     }
 }
